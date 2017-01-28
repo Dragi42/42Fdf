@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 16:26:24 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/01/28 16:21:47 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/01/28 18:04:19 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,53 @@
 
 void	draw(t_env *e)
 {
-	char	*line;
-	int		x;
-	int		y;
+	int	k;
+	int	l;
 
-	x = 0;
-	y = 0;
-	while (0)
+	e->i = e->size_x / 10;
+	e->x = 0;
+	while (e->x < e->line)
 	{
-//		printf("%d\n", p.i);
-		while (x)
+		e->y = 0;
+		e->j = e->size_y / 10;
+		while (e->y < e->nb)
 		{
-			mlx_pixel_put(e->mlx, e->win, x, y, 0xFF0000);
-			x++;
-			y++;
+			k = e->j + ((e->size_x / 2) / e->nb);
+			if (e->map[e->x][e->y] == 0)
+			{
+				while (e->j < k)
+				{
+					mlx_pixel_put(e->mlx, e->win, e->j, e->i, 0xFFFFFF);
+					e->j++;
+				}
+				k = e->i + ((e->size_x / 2) / e->nb);
+				while (e->i < k)
+				{
+					mlx_pixel_put(e->mlx, e->win, e->j, e->i, 0xFFFFFF);
+					e->i++;
+				}
+				e->i -= ((e->size_x / 2) / e->nb);
+			}
+			else
+			{
+				while (e->j < k)
+				{
+					mlx_pixel_put(e->mlx, e->win, e->j, e->i, 0xFF0000);
+					e->j++;
+				}
+				k = e->i + ((e->size_x / 2) / e->nb);
+				while (e->i < k)
+				{
+					mlx_pixel_put(e->mlx, e->win, e->j, e->i, 0xFF0000);
+					e->i++;
+				}
+				e->i -= ((e->size_x / 2) / e->nb);
+			}
+			e->y++;
 		}
+		e->x++;
+		e->i += ((e->size_y / 2) / e->line);
 	}
-		y++;
 }
 
 int		key_hook(int keycode, t_env *e)
@@ -60,8 +90,8 @@ int		main(int argc, char **argv)
 {
 	t_env	e;
 
-	e.size_x = 400;
-	e.size_y = 400;
+	e.size_x = 1920;
+	e.size_y = 1080;
 	if (argc != 2)
 		return (0);
 	else

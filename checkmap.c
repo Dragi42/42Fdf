@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 14:02:24 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/01/28 16:19:53 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/01/28 16:37:17 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_list		*file_lst(char *argv)
 }
 
 
-	/*	Hors Norme, 27 lignes	*/
+	/*	Hors Norme, 28 lignes	*/
 
 int			lst_tab(t_list *lst, t_env *e)
 {

@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 14:09:00 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/01/28 16:19:52 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/01/28 17:51:47 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_env
 	int			x;
 	int			y;
 	int			i;
+	int			j;
 }				t_env;
 
 int				lst_tab(t_list *lst, t_env *e);
