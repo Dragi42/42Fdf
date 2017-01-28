@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 16:26:24 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/01/28 18:04:19 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/01/28 18:45:17 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ void	draw(t_env *e)
 	while (e->x < e->line)
 	{
 		e->y = 0;
-		e->j = e->size_y / 10;
+		e->j = e->size_y / 3;
 		while (e->y < e->nb)
 		{
 			k = e->j + ((e->size_x / 2) / e->nb);
-			if (e->map[e->x][e->y] == 0)
+			if (e->map[e->x][e->y] == 0 && e->map[e->x][e->y + 1] == 0 &&
+					e->y < e->nb - 1)
 			{
 				while (e->j < k)
 				{
@@ -90,8 +91,8 @@ int		main(int argc, char **argv)
 {
 	t_env	e;
 
-	e.size_x = 1920;
-	e.size_y = 1080;
+	e.size_x = 1280;
+	e.size_y = 720;
 	if (argc != 2)
 		return (0);
 	else
