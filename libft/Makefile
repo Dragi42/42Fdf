@@ -6,7 +6,7 @@
 #    By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/18 18:19:19 by dpaunovi          #+#    #+#              #
-#    Updated: 2017/01/27 16:44:27 by dpaunovi         ###   ########.fr        #
+#    Updated: 2017/02/01 16:50:03 by dpaunovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(SRC)
 	@gcc $(FLAG) $(OPTION) $(SRC)
 	@ar rc $(NAME) $(OBJ)
 	@echo "\033[32mlibft created"

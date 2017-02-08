@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test1.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 16:26:24 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/01/28 18:45:17 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/02/08 18:02:15 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,54 +17,7 @@
 
 void	draw(t_env *e)
 {
-	int	k;
-	int	l;
-
-	e->i = e->size_x / 10;
-	e->x = 0;
-	while (e->x < e->line)
-	{
-		e->y = 0;
-		e->j = e->size_y / 3;
-		while (e->y < e->nb)
-		{
-			k = e->j + ((e->size_x / 2) / e->nb);
-			if (e->map[e->x][e->y] == 0 && e->map[e->x][e->y + 1] == 0 &&
-					e->y < e->nb - 1)
-			{
-				while (e->j < k)
-				{
-					mlx_pixel_put(e->mlx, e->win, e->j, e->i, 0xFFFFFF);
-					e->j++;
-				}
-				k = e->i + ((e->size_x / 2) / e->nb);
-				while (e->i < k)
-				{
-					mlx_pixel_put(e->mlx, e->win, e->j, e->i, 0xFFFFFF);
-					e->i++;
-				}
-				e->i -= ((e->size_x / 2) / e->nb);
-			}
-			else
-			{
-				while (e->j < k)
-				{
-					mlx_pixel_put(e->mlx, e->win, e->j, e->i, 0xFF0000);
-					e->j++;
-				}
-				k = e->i + ((e->size_x / 2) / e->nb);
-				while (e->i < k)
-				{
-					mlx_pixel_put(e->mlx, e->win, e->j, e->i, 0xFF0000);
-					e->i++;
-				}
-				e->i -= ((e->size_x / 2) / e->nb);
-			}
-			e->y++;
-		}
-		e->x++;
-		e->i += ((e->size_y / 2) / e->line);
-	}
+	segput(e);
 }
 
 int		key_hook(int keycode, t_env *e)
@@ -72,8 +25,51 @@ int		key_hook(int keycode, t_env *e)
 	printf("key code : %d\n", keycode);
 	if (keycode == 53)
 		exit(0);
+	if (keycode == 69)
+	{
+		mlx_clear_window(e->mlx, e->win);
+		e->depth += 1;
+		segput(e);
+	}
+	if (keycode == 78)
+	{
+		mlx_clear_window(e->mlx, e->win);
+		e->depth -= 1;
+		segput(e);
+	}
+	if (keycode == 36)
+	{
+		mlx_clear_window(e->mlx, e->win);
+		e->depth = 0;
+		segput(e);
+	}
+	if (keycode == 124)
+	{
+		mlx_clear_window(e->mlx, e->win);
+		e->size_x += e->size_x / 5;
+		segput(e);
+	}
+	if (keycode == 123)
+	{
+		mlx_clear_window(e->mlx, e->win);
+		e->size_x -= e->size_x / 5;
+		segput(e);
+	}
+	if (keycode == 126)
+	{
+		mlx_clear_window(e->mlx, e->win);
+		e->size_y -= e->size_x / 5;
+		segput(e);
+	}
+	if (keycode == 125)
+	{
+		mlx_clear_window(e->mlx, e->win);
+		e->size_y += e->size_x / 5;
+		segput(e);
+	}
 	return (0);
 }
+
 /*
 int		mouse_hook(int button, int x, int y, t_env *e)
 {
@@ -93,6 +89,7 @@ int		main(int argc, char **argv)
 
 	e.size_x = 1280;
 	e.size_y = 720;
+	e.depth = 0;
 	if (argc != 2)
 		return (0);
 	else
