@@ -6,18 +6,22 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 14:02:24 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/02/06 17:31:58 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/02/09 22:50:43 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 static void	struct_init(t_list *lst, t_env *e)
 {
 	e->p.x = 0;
 	e->p.y = 0;
 	e->nb = 0;
+	e->z = 1;
+	e->depth = 0;
+	e->mode = 0;
+	e->moveh = 50;
+	e->movev = 50;
 	e->line = ft_lstlen(lst);
 }
 
@@ -44,49 +48,30 @@ t_list		*file_lst(char *argv)
 	return (lst);
 }
 
-	/*	Hors Norme, 26 lignes	*/
-
 int			lst_tab(t_list *lst, t_env *e)
 {
-	char	**tab;
-
 	struct_init(lst, e);
 	if (!(e->map = (t_map **)ft_memalloc(sizeof(t_map *) * e->line)))
 		return (0);
 	while (lst)
 	{
-		tab = ft_strsplit(lst->content, ' ');
+		e->tab = ft_strsplit(lst->content, ' ');
 		e->p.y = 0;
-		if (e->nb && ft_tabslen(tab) != e->nb)
+		if (e->nb && ft_tabslen(e->tab) != e->nb)
 			return (0);
-		e->nb = ft_tabslen(tab);
+		e->nb = ft_tabslen(e->tab);
 		if (!(e->map[e->p.x] = (t_map *)ft_memalloc(sizeof(t_map) * e->nb)))
 			return (0);
-		while (tab[e->p.y])
+		while (e->tab[e->p.y++])
 		{
-			e->map[e->p.x][e->p.y].z = ft_atoi(tab[e->p.y]);
-			free(tab[e->p.y]);
-			e->p.y++;
+			e->map[e->p.x][e->p.y - 1].z = ft_atoi(e->tab[e->p.y - 1]);
+			free(e->tab[e->p.y - 1]);
 		}
-		free(tab);
+		free(e->tab);
+		free(lst->content);
 		free(lst);
 		lst = lst->next;
 		e->p.x++;
 	}
-
-	/*	Test affichage e->map	*/
-	e->p.x = 0;
-	while (e->p.x < e->line)
-	{
-		e->p.y = 0;
-		while (e->p.y < e->nb)
-		{
-			printf("%d ", e->map[e->p.x][e->p.y].z);
-			e->p.y++;
-		}
-		printf("\n");
-		e->p.x++;
-	}
-	/*---------------------------*/
 	return (1);
 }

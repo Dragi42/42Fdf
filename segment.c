@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 11:04:37 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/02/08 17:46:42 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/02/09 22:28:25 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	pixel_put(t_env *e, t_map p1, t_map p2)
 		mlx_pixel_put(e->mlx, e->win, p1.x, p1.y, 0x99CCFF);
 }
 
-static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
+static void	ft_draw_line(t_env *e, t_map p1, t_map p2)
 {
 	e->p.dx = abs(p2.x - p1.x);
 	e->p.dy = abs(p2.y - p1.y);
@@ -87,8 +87,16 @@ static void	win_pos(t_env *e)
 		e->p.x = 0;
 		while (e->j < e->nb)
 		{
-			e->map[e->i][e->j].x = (e->p.x - e->p.y) + e->size_x / 4;
-			e->map[e->i][e->j].y = (e->p.x + e->p.y) + e->size_y / 20;
+			if (e->mode == 1)
+			{
+				e->map[e->i][e->j].x = (e->p.x - e->p.y + e->moveh) * e->z;
+				e->map[e->i][e->j].y = (e->p.x + e->p.y + e->movev) * e->z;
+			}
+			if (e->mode == 0)
+			{
+				e->map[e->i][e->j].x = (e->p.x + e->moveh + e->p.dx) * e->z;
+				e->map[e->i][e->j].y = (e->p.y + e->movev + e->p.dx) * e->z;
+			}
 			e->p.x += e->p.dx;
 			e->j++;
 		}

@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 14:09:00 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/02/08 17:48:13 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/02/09 22:50:45 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ typedef struct	s_env
 	int			size_y;
 	int			line;
 	int			nb;
+	int			z;
+	int			mode;
+	int			moveh;
+	int			movev;
+	char		**tab;
 	t_map		**map;
 	int			depth;
 	int			i;
