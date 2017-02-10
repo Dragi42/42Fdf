@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 11:04:37 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/02/09 22:28:25 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/02/10 18:48:18 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,19 @@ static void	win_pos(t_env *e)
 		{
 			if (e->mode == 1)
 			{
-				e->map[e->i][e->j].x = (e->p.x - e->p.y + e->moveh) * e->z;
-				e->map[e->i][e->j].y = (e->p.x + e->p.y + e->movev) * e->z;
+				e->map[e->i][e->j].x = e->moveh + (e->p.x - e->p.y);
+				e->map[e->i][e->j].y = e->movev + (e->p.x + e->p.y);
 			}
 			if (e->mode == 0)
 			{
-				e->map[e->i][e->j].x = (e->p.x + e->moveh + e->p.dx) * e->z;
-				e->map[e->i][e->j].y = (e->p.y + e->movev + e->p.dx) * e->z;
+				e->map[e->i][e->j].x = e->moveh + (e->p.x + e->p.dx);
+				e->map[e->i][e->j].y = e->movev + (e->p.y + e->p.dx);
 			}
-			e->p.x += e->p.dx;
+			e->p.x += e->p.dx * e->z;
 			e->j++;
 		}
 		e->i++;
-		e->p.y += e->p.dx;
+		e->p.y += e->p.dx * e->z;
 	}
 }
 

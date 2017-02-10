@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 16:26:24 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/02/09 22:54:00 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/02/10 18:47:29 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 #include "fdf.h"
 #include "mlx.h"
 
-void	draw(t_env *e)
-{
-	segput(e);
-}
-
 int		expose_hook(t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
-	draw(e);
+	segput(e);
 	return (0);
 }
 
@@ -43,8 +38,7 @@ int		key_hook(int keycode, t_env *e)
 		e->z += 1;
 	if (keycode == 78)
 	{
-		if (e->z > 1)
-			e->z -= 1;
+		e->z -= 1;
 	}
 	if (keycode == 35)
 		e->depth += 1;
