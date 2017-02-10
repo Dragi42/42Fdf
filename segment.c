@@ -6,14 +6,12 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 11:04:37 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/02/10 18:48:18 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/02/10 18:50:36 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
-
-#include <stdio.h>
 
 static void	ft_3d(t_env *e)
 {
