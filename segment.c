@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 11:04:37 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/03/23 15:28:30 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/03/23 15:40:38 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	pixel_put(t_env *e, t_map p1, t_map p2)
 	color1 = (e->color & 0xFF000000) >> 24;
 	color2 = (e->color & 0xFF0000) >> 16;
 	color3 = (e->color & 0xFF00) >> 8;
-
 	if (p1.x < e->size_x && p1.y < e->size_y &&
 			p1.x > 0 && p1.y > 0)
 	{
@@ -98,21 +97,21 @@ static void	win_pos(t_env *e)
 		e->p.x = 0;
 		while (e->j < e->nb)
 		{
-			if (e->mode == 1)
-			{
-				e->map[e->i][e->j].x = e->moveh + (e->p.x - e->p.y);
-				e->map[e->i][e->j].y = e->movev + (e->p.x + e->p.y);
-			}
 			if (e->mode == 0)
 			{
 				e->map[e->i][e->j].x = e->moveh + (e->p.x + e->p.dx);
 				e->map[e->i][e->j].y = e->movev + (e->p.y + e->p.dx);
 			}
-			e->p.x += e->p.dx * e->z;
+			if (e->mode == 1)
+			{
+				e->map[e->i][e->j].x = e->moveh + (e->p.x - e->p.y);
+				e->map[e->i][e->j].y = e->movev + (e->p.x + e->p.y);
+			}
+			e->p.x += e->p.dx + e->z;
 			e->j++;
 		}
 		e->i++;
-		e->p.y += e->p.dx * e->z;
+		e->p.y += e->p.dx + e->z;
 	}
 }
 
