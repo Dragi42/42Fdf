@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 11:04:37 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/02/10 18:50:36 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/03/23 15:28:30 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,27 @@ static void	ft_3d(t_env *e)
 
 static void	pixel_put(t_env *e, t_map p1, t_map p2)
 {
-	if (e->map[e->i][e->j].z == 0)
+	unsigned char	color1;
+	unsigned char	color2;
+	unsigned char	color3;
+
+	color1 = (e->color & 0xFF000000) >> 24;
+	color2 = (e->color & 0xFF0000) >> 16;
+	color3 = (e->color & 0xFF00) >> 8;
+
+	if (p1.x < e->size_x && p1.y < e->size_y &&
+			p1.x > 0 && p1.y > 0)
+	{
+		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8] = color1;
+		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8 + 1] = color2;
+		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8 + 2] = color3;
+	}
+/*	if (e->map[e->i][e->j].z == 0)
 		mlx_pixel_put(e->mlx, e->win, p1.x, p1.y, 0x99CC00);
 	else if (e->map[e->i][e->j].z > 0)
-	{
 		mlx_pixel_put(e->mlx, e->win, p1.x, p1.y, 0x996600);
-	}
 	else if (e->map[e->i][e->j].z < 0)
-		mlx_pixel_put(e->mlx, e->win, p1.x, p1.y, 0x99CCFF);
+		mlx_pixel_put(e->mlx, e->win, p1.x, p1.y, 0x99CCFF);*/
 }
 
 static void	ft_draw_line(t_env *e, t_map p1, t_map p2)

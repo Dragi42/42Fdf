@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 14:09:00 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/02/09 22:50:45 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:29:46 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct	s_env
 {
 	void		*mlx;
 	void		*win;
+	void		*img;
 	int			size_x;
 	int			size_y;
 	int			line;
@@ -56,6 +57,11 @@ typedef struct	s_env
 	int			i;
 	int			j;
 	t_point		p;
+	int			bpp;
+	int			sizeline;
+	int			endian;
+	int			color;
+	char		*data;
 }				t_env;
 
 int				lst_tab(t_list *lst, t_env *e);

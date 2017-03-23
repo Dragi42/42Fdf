@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 16:26:24 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/02/14 09:46:50 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:58:44 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@
 
 int		expose_hook(t_env *e)
 {
-	mlx_clear_window(e->mlx, e->win);
+//	mlx_clear_window(e->mlx, e->win);
+	e->img = mlx_new_image(e->mlx, e->size_x, e->size_y);
+	e->data = mlx_get_data_addr(e->img, &(e->bpp), &(e->sizeline), &(e->endian));
+	e->color = mlx_get_color_value(e->mlx, 0xFF0000);
 	segput(e);
+	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	return (0);
 }
 
