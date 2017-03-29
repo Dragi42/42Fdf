@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 14:09:00 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/03/22 19:29:46 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/03/29 16:55:48 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ typedef struct	s_env
 	int			bpp;
 	int			sizeline;
 	int			endian;
-	int			color;
+	short		rcolor;
+	short		gcolor;
+	short		bcolor;
 	char		*data;
 }				t_env;
 

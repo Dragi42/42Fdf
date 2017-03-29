@@ -6,12 +6,13 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 11:04:37 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/03/23 15:40:38 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/03/29 18:01:22 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
+#include "stdio.h"
 
 static void	ft_3d(t_env *e)
 {
@@ -40,26 +41,26 @@ static void	ft_3d(t_env *e)
 
 static void	pixel_put(t_env *e, t_map p1, t_map p2)
 {
-	unsigned char	color1;
-	unsigned char	color2;
-	unsigned char	color3;
+	short		color_r;
+	short		color_g;
+	short		color_b;
 
-	color1 = (e->color & 0xFF000000) >> 24;
-	color2 = (e->color & 0xFF0000) >> 16;
-	color3 = (e->color & 0xFF00) >> 8;
+	color_r = 0xFF;
+	color_g = 0x00;
+	color_b = 0x00;
+	if (e->map[e->i][e->j].z == 0)
+		color_r = 0xff;
+	else if ((e->map[e->i][e->j].z + e->depth) > 0)
+		color_g = 0xff;
+	else if ((e->map[e->i][e->j].z + e->depth) < 0)
+		color_b = 0xff;
 	if (p1.x < e->size_x && p1.y < e->size_y &&
 			p1.x > 0 && p1.y > 0)
 	{
-		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8] = color1;
-		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8 + 1] = color2;
-		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8 + 2] = color3;
+		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8] = color_b + e->bcolor;
+		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8 + 1] = color_g + e->gcolor;
+		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8 + 2] = color_r + e->rcolor;
 	}
-/*	if (e->map[e->i][e->j].z == 0)
-		mlx_pixel_put(e->mlx, e->win, p1.x, p1.y, 0x99CC00);
-	else if (e->map[e->i][e->j].z > 0)
-		mlx_pixel_put(e->mlx, e->win, p1.x, p1.y, 0x996600);
-	else if (e->map[e->i][e->j].z < 0)
-		mlx_pixel_put(e->mlx, e->win, p1.x, p1.y, 0x99CCFF);*/
 }
 
 static void	ft_draw_line(t_env *e, t_map p1, t_map p2)
