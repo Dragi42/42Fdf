@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 14:02:24 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/03/29 16:21:26 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/04/03 15:45:42 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	struct_init(t_list *lst, t_env *e)
 	e->nb = 0;
 	e->z = 1;
 	e->depth = 0;
-	e->mode = 1;
 	e->moveh = 50;
 	e->movev = 50;
 	e->rcolor = 0;

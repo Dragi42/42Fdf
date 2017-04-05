@@ -6,7 +6,7 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 14:09:00 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/03/29 16:55:48 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/04/03 15:45:27 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct	s_env
 	int			line;
 	int			nb;
 	int			z;
-	int			mode;
 	int			moveh;
 	int			movev;
 	char		**tab;

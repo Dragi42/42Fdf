@@ -6,13 +6,12 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 11:04:37 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/03/29 18:01:22 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/04/05 10:55:40 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
-#include "stdio.h"
 
 static void	ft_3d(t_env *e)
 {
@@ -41,25 +40,25 @@ static void	ft_3d(t_env *e)
 
 static void	pixel_put(t_env *e, t_map p1, t_map p2)
 {
-	short		color_r;
-	short		color_g;
-	short		color_b;
+	short		r;
+	short		g;
+	short		b;
 
-	color_r = 0xFF;
-	color_g = 0x00;
-	color_b = 0x00;
+	r = 0xFF;
+	g = 0x00;
+	b = 0x00;
 	if (e->map[e->i][e->j].z == 0)
-		color_r = 0xff;
+		r = 0xff;
 	else if ((e->map[e->i][e->j].z + e->depth) > 0)
-		color_g = 0xff;
+		g = 0xff;
 	else if ((e->map[e->i][e->j].z + e->depth) < 0)
-		color_b = 0xff;
+		b = 0xff;
 	if (p1.x < e->size_x && p1.y < e->size_y &&
 			p1.x > 0 && p1.y > 0)
 	{
-		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8] = color_b + e->bcolor;
-		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8 + 1] = color_g + e->gcolor;
-		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8 + 2] = color_r + e->rcolor;
+		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8] = b + e->bcolor;
+		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8 + 1] = g + e->gcolor;
+		e->data[p1.y * e->sizeline + p1.x * e->bpp / 8 + 2] = r + e->rcolor;
 	}
 }
 
@@ -98,16 +97,8 @@ static void	win_pos(t_env *e)
 		e->p.x = 0;
 		while (e->j < e->nb)
 		{
-			if (e->mode == 0)
-			{
-				e->map[e->i][e->j].x = e->moveh + (e->p.x + e->p.dx);
-				e->map[e->i][e->j].y = e->movev + (e->p.y + e->p.dx);
-			}
-			if (e->mode == 1)
-			{
-				e->map[e->i][e->j].x = e->moveh + (e->p.x - e->p.y);
-				e->map[e->i][e->j].y = e->movev + (e->p.x + e->p.y);
-			}
+			e->map[e->i][e->j].x = e->moveh + (e->p.x - e->p.y);
+			e->map[e->i][e->j].y = e->movev + (e->p.x + e->p.y);
 			e->p.x += e->p.dx + e->z;
 			e->j++;
 		}

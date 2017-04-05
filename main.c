@@ -6,14 +6,13 @@
 /*   By: dpaunovi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 16:26:24 by dpaunovi          #+#    #+#             */
-/*   Updated: 2017/03/29 18:05:26 by dpaunovi         ###   ########.fr       */
+/*   Updated: 2017/04/05 10:53:38 by dpaunovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "fdf.h"
 #include "mlx.h"
-#include <stdio.h>
 
 int		expose_hook(t_env *e)
 {
@@ -28,10 +27,6 @@ int		expose_hook(t_env *e)
 
 void	ft_key(int keycode, t_env *e)
 {
-	if (keycode == 69)
-		e->z += 1;
-	if (keycode == 78)
-		e->z -= 1;
 	if (keycode == 35)
 		e->depth += 1;
 	if (keycode == 37)
@@ -60,20 +55,16 @@ int		key_hook(int keycode, t_env *e)
 {
 	if (keycode == 53)
 		exit(0);
-	if (keycode == 48)
-	{
-		if (e->mode == 1)
-			e->mode = 0;
-		else
-			e->mode = 1;
-	}
 	if (keycode == 15)
 		e->rcolor -= 50;
 	if (keycode == 5)
 		e->gcolor -= 50;
 	if (keycode == 11)
 		e->bcolor -= 50;
-	printf("key : %d\n", keycode);
+	if (keycode == 69)
+		e->z += 1;
+	if (keycode == 78)
+		e->z -= 1;
 	ft_key(keycode, e);
 	expose_hook(e);
 	return (0);
@@ -94,7 +85,6 @@ int		main(int argc, char **argv)
 	{
 		if (lst_tab(file_lst(argv[1]), &e))
 		{
-			printf("");
 			e.mlx = mlx_init();
 			e.win = mlx_new_window(e.mlx, e.size_x, e.size_y, "FDF");
 			mlx_key_hook(e.win, key_hook, &e);
