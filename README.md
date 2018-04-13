@@ -1,6 +1,3 @@
 # 42Fdf
 
-Initiation aux applications graphiques : ouvrez une fenêtre, et dessinez
-! Ce projet vous fait découvrir les grands principes de la programmation
-d'une interface utilisateur au travers de la représentation d'une
-surface "fil de fer" en 3 dimensions.
+Initiation into the graphic applications: open a window, and draw! This project makes you discover the major principles of the programming of a user interface through the representation of a surface "wire" in 3 dimensions(size).
